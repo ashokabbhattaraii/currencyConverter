@@ -17,6 +17,12 @@ export default function CurrencyConverter({ rate }: { rate: any }) {
   const fromCurrency = watch("fromCurrency");
   const toCurrency = watch("toCurrency");
 
+  // Quick access
+  const quickAccess = (from: string, to: string) => {
+    setValue("fromCurrency", from);
+    setValue("toCurrency", to);
+  };
+
   useEffect(() => {
     if (rate && rate.data && fromAmount && fromCurrency && toCurrency) {
       const fromRate = rate.data[fromCurrency];
@@ -61,11 +67,11 @@ export default function CurrencyConverter({ rate }: { rate: any }) {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translateX(-50%);
           }
         }
         .animate-scroll {
-          animation: scroll 10s linear infinite;
+          animation: scroll 20s linear infinite;
         }
       `}</style>
 
@@ -132,6 +138,51 @@ export default function CurrencyConverter({ rate }: { rate: any }) {
                 </option>
               ))}
             </select>
+          </div>
+        </div>
+
+        {/* Quick Access */}
+        <div className="border-t border-gray-700 pt-4">
+          <h2 className="text-sm font-semibold text-gray-300 mb-3">
+            Quick Access
+          </h2>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              onClick={() => quickAccess("USD", "EUR")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              USD→EUR
+            </button>
+            <button
+              onClick={() => quickAccess("USD", "GBP")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              USD→GBP
+            </button>
+            <button
+              onClick={() => quickAccess("USD", "INR")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              USD→INR
+            </button>
+            <button
+              onClick={() => quickAccess("EUR", "USD")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              EUR→USD
+            </button>
+            <button
+              onClick={() => quickAccess("GBP", "USD")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              GBP→USD
+            </button>
+            <button
+              onClick={() => quickAccess("INR", "USD")}
+              className="bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-600 transition"
+            >
+              INR→USD
+            </button>
           </div>
         </div>
       </div>
